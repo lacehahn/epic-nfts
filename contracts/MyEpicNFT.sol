@@ -49,6 +49,8 @@ contract MyEpicNFT is ERC721URIStorage {
       return uint256(keccak256(abi.encodePacked(input)));
   }
 
+  event NewEpicNFTMinted(address sender, uint256 tokenId);
+
   // A function our user will hit to get their NFT.
   function makeAnEpicNFT() public {
      // Get the current tokenId, this starts at 0.
@@ -91,6 +93,8 @@ contract MyEpicNFT is ERC721URIStorage {
     // Set the NFTs data.
     _setTokenURI(newItemId, "ttt");
     console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
+    emit NewEpicNFTMinted(msg.sender, newItemId);
+
     // Increment the counter for when the next NFT is minted.
     _tokenIds.increment();
   }
